@@ -23,13 +23,13 @@ jobs:
       with:
         gradle-version: '8.4'
 
-    - name: Build APK and Catch Errors
+    - name: Build APK
       run: |
         if [ -d "PoomaniTV" ]; then cd PoomaniTV; fi
-        gradle assembleDebug --stacktrace > error_log.txt 2>&1 || true
+        gradle assembleDebug
 
-    - name: Upload Error Log
+    - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
-        name: Crash-Report-Log
-        path: "**/error_log.txt"
+        name: PoomaniTV-App
+        path: "**/build/outputs/apk/debug/*.apk" 
