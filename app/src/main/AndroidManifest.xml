@@ -2,16 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:name=".PoomaniTVApp"
         android:allowBackup="true"
         android:label="PoomaniTV"
         android:supportsRtl="true"
-        android:theme="@android:style/Theme.Material.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
             android:name=".MainActivity"
             android:exported="true"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
