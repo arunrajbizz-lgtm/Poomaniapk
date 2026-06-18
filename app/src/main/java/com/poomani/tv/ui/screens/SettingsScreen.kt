@@ -15,10 +15,10 @@ import com.poomani.tv.ui.viewmodel.TvViewModel
 @Composable
 fun SettingsScreen(navController: NavHostController, viewModel: TvViewModel = hiltViewModel()) {
     val backendUrl = viewModel.settingsDataStore.backendUrl.collectAsStateWithLifecycle(initialValue = "")
-    var textState by remember { mutableStateOf("") }
+    val textState = remember { mutableStateOf("") }
 
     LaunchedEffect(backendUrl.value) {
-        textState = backendUrl.value
+        textState.value = backendUrl.value
     }
 
     Column(modifier = Modifier.fillMaxSize().background(Color(0xFF0A0A0E)).padding(16.dp)) {
@@ -26,14 +26,14 @@ fun SettingsScreen(navController: NavHostController, viewModel: TvViewModel = hi
         Spacer(modifier = Modifier.height(16.dp))
         
         OutlinedTextField(
-            value = textState,
-            onValueChange = { textState = it },
+            value = textState.value,
+            onValueChange = { textState.value = it },
             label = { Text("Backend Base URL") },
             modifier = Modifier.fillMaxWidth(),
             colors = OutlinedTextFieldDefaults.colors(unfocusedTextColor = Color.White, focusedTextColor = Color.White)
         )
         Spacer(modifier = Modifier.height(12.dp))
-        Button(onClick = { viewModel.updateUrl(textState) }, colors = ButtonDefaults.buttonColors(containerColor = Color.Red)) {
+        Button(onClick = { viewModel.updateUrl(textState.value) }, colors = ButtonDefaults.buttonColors(containerColor = Color.Red)) {
             Text("Save Engine Adjustments", color = Color.White)
         }
     }
