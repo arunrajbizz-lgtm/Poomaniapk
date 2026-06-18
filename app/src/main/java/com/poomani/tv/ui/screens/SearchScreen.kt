@@ -11,12 +11,12 @@ import androidx.navigation.NavHostController
 
 @Composable
 fun SearchScreen(navController: NavHostController) {
-    var query by remember { mutableStateOf("") }
+    val query = remember { mutableStateOf("") }
 
     Column(modifier = Modifier.fillMaxSize().background(Color(0xFF0A0A0E)).padding(16.dp)) {
         OutlinedTextField(
-            value = query,
-            onValueChange = { query = it },
+            value = query.value,
+            onValueChange = { query.value = it },
             label = { Text("Search Live, Movies, Series...") },
             modifier = Modifier.fillMaxWidth(),
             colors = OutlinedTextFieldDefaults.colors(focusedBorderColor = Color.Red, unfocusedTextColor = Color.White)
