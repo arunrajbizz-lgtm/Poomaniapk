@@ -20,14 +20,19 @@ jobs:
 
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
+      with:
+        gradle-version: '8.4' # Explicitly sets the Gradle version required for your app
 
     - name: Build APK
       run: |
-        cd PoomaniTV
+        # Checks if the folder exists. If it does, open it. If not, build from the current root.
+        if [ -d "PoomaniTV" ]; then cd PoomaniTV; fi
         gradle assembleDebug
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
         name: PoomaniTV-App
-        path: PoomaniTV/app/build/outputs/apk/debug/*.apk
+        # Uses a wildcard to find the APK wherever it was built
+        path: "**/build/outputs/apk/debug/*.apk" 
+
